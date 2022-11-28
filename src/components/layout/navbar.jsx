@@ -20,7 +20,7 @@ const Navbar = () => {
           aria-label='Global'
         >
           <div className='flex lg:min-w-0 lg:flex-1' aria-label='Global'>
-            <Link to='#' className='-m-1.5 p-1.5'>
+            <Link to='/' className='-m-1.5 p-1.5'>
               <span className='sr-only'>Twinnleaf</span>
               <img
                 className='block h-12 w-auto lg:hidden'
@@ -46,13 +46,14 @@ const Navbar = () => {
           </div>
           <div className='hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12'>
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className='font-semibold text-gray-900 hover:text-gray-900'
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className='hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end'>
@@ -71,7 +72,7 @@ const Navbar = () => {
           >
             <div className='flex h-9 items-center justify-between'>
               <div className='flex'>
-                <Link to='#' className='-m-1.5 p-1.5'>
+                <Link to='/' className='-m-1.5 p-1.5'>
                   <span className='sr-only'>Twinnleaf</span>
                   <img
                     className='h-8'
@@ -95,22 +96,23 @@ const Navbar = () => {
               <div className='-my-6 divide-y divide-gray-500/10'>
                 <div className='space-y-2 py-6'>
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className='-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10'
+                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
                 <div className='py-6'>
-                  <a
-                    href='#'
+                  <Link
+                    to='#'
                     className='-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10'
                   >
                     Log in
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
