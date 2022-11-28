@@ -9,8 +9,8 @@ const Hero = () => {
           <div className='absolute inset-0'>
             <img
               className='h-full w-full object-cover'
-              src='https://beyondvela.com/wp-content/uploads/2021/03/What-Are-The-Different-Weed-Products-That-We-Can-Buy-From-The-Online-Dispensaries-Of-Weed.jpg'
-              alt='People working on laptops'
+              src={require('../../images/hero-bg.jpeg')}
+              alt='Marijuana'
             />
             <div className='absolute inset-0 bg-gray-700 mix-blend-multiply' />
           </div>

@@ -13,8 +13,6 @@ const LandingPage = () => {
           <Pricing />
           <Newsletter />
         </div>
-
-        {/* More main page content here... */}
       </main>
     </div>
   );
