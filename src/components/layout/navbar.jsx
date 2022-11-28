@@ -1,16 +1,17 @@
-/* This example requires Tailwind CSS v3.0+ */
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 const navigation = [
-  { name: 'Flower', href: '#' },
-  { name: 'CBD', href: '#' },
-  { name: 'Gear', href: '#' },
+  { name: 'Flower', href: '/flower' },
+  { name: 'CBD', href: '/cbd' },
+  { name: 'Gear', href: '/gear' },
 ];
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className='px-6 pt-6 lg:px-8 mb-6'>
       <div>
@@ -19,19 +20,19 @@ const Navbar = () => {
           aria-label='Global'
         >
           <div className='flex lg:min-w-0 lg:flex-1' aria-label='Global'>
-            <a href='#' className='-m-1.5 p-1.5'>
-              <span className='sr-only'>Your Company</span>
+            <Link to='#' className='-m-1.5 p-1.5'>
+              <span className='sr-only'>Twinnleaf</span>
               <img
                 className='block h-12 w-auto lg:hidden'
                 src={require('../../images/twinnleaf-logo.png')}
-                alt='Your Company'
+                alt='Twinnleaf'
               />
               <img
                 className='hidden h-14 w-auto lg:block'
                 src={require('../../images/twinnleaf-logo.png')}
-                alt='Your Company'
+                alt='Twinnleaf'
               />
-            </a>
+            </Link>
           </div>
           <div className='flex lg:hidden'>
             <button
@@ -55,12 +56,12 @@ const Navbar = () => {
             ))}
           </div>
           <div className='hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end'>
-            <a
-              href='#'
+            <Link
+              to='#'
               className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20'
             >
               Log in
-            </a>
+            </Link>
           </div>
         </nav>
         <Dialog as='div' open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -70,14 +71,14 @@ const Navbar = () => {
           >
             <div className='flex h-9 items-center justify-between'>
               <div className='flex'>
-                <a href='#' className='-m-1.5 p-1.5'>
-                  <span className='sr-only'>Your Company</span>
+                <Link to='#' className='-m-1.5 p-1.5'>
+                  <span className='sr-only'>Twinnleaf</span>
                   <img
                     className='h-8'
                     src={require('../../images/twinnleaf-logo.png')}
                     alt=''
                   />
-                </a>
+                </Link>
               </div>
               <div className='flex'>
                 <button
