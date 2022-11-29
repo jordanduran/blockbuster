@@ -16,7 +16,7 @@ const Hero = () => {
           </div>
           <div className='relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8'>
             <img
-              className='h-48 ml-auto mr-auto'
+              className='h-28 md:h-32 lg:h-36 ml-auto mr-auto'
               src='https://i.ibb.co/QHvbk97/Twinn-Leaf-1.png'
               alt='Twinnleaf logo'
             />
