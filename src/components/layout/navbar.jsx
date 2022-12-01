@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useStoreState } from 'easy-peasy';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import { useSignout } from '../../hooks/useSignout';
 
 const navigation = [
   { name: 'Flower', href: '/flower' },
@@ -11,6 +13,8 @@ const navigation = [
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const user = useStoreState((state) => state.user);
+  const { signout } = useSignout();
 
   return (
     <div className='px-6 pt-6 lg:px-8 mb-6'>
@@ -56,14 +60,26 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          <div className='hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end'>
-            <Link
-              to='/sign-in'
-              className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20 hover:text-green-500'
-            >
-              Log in
-            </Link>
-          </div>
+          {user?.email ? (
+            <div className='hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end'>
+              <button
+                to='/sign-in'
+                className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20 hover:text-green-500'
+                onClick={signout}
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <div className='hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end'>
+              <Link
+                to='/sign-in'
+                className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20 hover:text-green-500'
+              >
+                Sign in
+              </Link>
+            </div>
+          )}
         </nav>
         <Dialog as='div' open={mobileMenuOpen} onClose={setMobileMenuOpen}>
           <Dialog.Panel
@@ -107,13 +123,26 @@ const Navbar = () => {
                   ))}
                 </div>
                 <div className='py-6'>
-                  <Link
-                    to='/sign-in'
-                    className='-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10 hover:text-green-500'
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Log in
-                  </Link>
+                  {user?.email ? (
+                    <Link
+                      to='/'
+                      className='-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10 hover:text-green-500'
+                      onClick={() => {
+                        signout();
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      Sign out
+                    </Link>
+                  ) : (
+                    <Link
+                      to='/sign-in'
+                      className='-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10 hover:text-green-500'
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Log in
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

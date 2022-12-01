@@ -1,3 +1,7 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { db } from '../../firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
@@ -5,7 +9,6 @@ import {
   FunnelIcon,
   StarIcon,
 } from '@heroicons/react/20/solid';
-import { Link } from 'react-router-dom';
 
 const filters = {
   price: [
@@ -94,6 +97,19 @@ function classNames(...classes) {
 }
 
 const FlowersPage = () => {
+  const [flowers, setFlowers] = useState([]);
+
+  useEffect(() => {
+    const ref = collection(db, 'flowers');
+    getDocs(ref).then((snapshot) => {
+      let results = [];
+      snapshot.docs.forEach((doc) => {
+        results.push({ id: doc.id, ...doc.data() });
+        setFlowers(results);
+      });
+    });
+  }, []);
+
   return (
     <div className='bg-white'>
       <main className='pb-24'>

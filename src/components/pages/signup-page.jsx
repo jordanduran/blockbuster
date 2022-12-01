@@ -1,7 +1,18 @@
+import { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid';
 import { Link } from 'react-router-dom';
+import { useSignup } from '../../hooks/useSignup';
 
 const SignUp = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { error, signup } = useSignup();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signup(email, password);
+  };
+
   return (
     <>
       <div className='flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
@@ -25,7 +36,12 @@ const SignUp = () => {
               </Link>
             </p>
           </div>
-          <form className='mt-8 space-y-6' action='#' method='POST'>
+          <form
+            className='mt-8 space-y-6'
+            action='#'
+            method='POST'
+            onSubmit={handleSubmit}
+          >
             <input type='hidden' name='remember' defaultValue='true' />
             <div className='-space-y-px rounded-md shadow-sm'>
               <div>
@@ -40,6 +56,7 @@ const SignUp = () => {
                   required
                   className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm'
                   placeholder='Email address'
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div>
@@ -54,36 +71,11 @@ const SignUp = () => {
                   required
                   className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm'
                   placeholder='Password'
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              {error && <span>{error}</span>}
             </div>
-
-            <div className='flex items-center justify-between'>
-              <div className='flex items-center'>
-                <input
-                  id='remember-me'
-                  name='remember-me'
-                  type='checkbox'
-                  className='h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500'
-                />
-                <label
-                  htmlFor='remember-me'
-                  className='ml-2 block text-sm text-gray-900'
-                >
-                  Remember me
-                </label>
-              </div>
-
-              <div className='text-sm'>
-                <Link
-                  to='#'
-                  className='font-medium text-green-600 hover:text-green-500'
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-            </div>
-
             <div>
               <button
                 type='submit'
