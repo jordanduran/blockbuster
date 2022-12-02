@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { db } from '../../firebase/config';
-import { collection, getDocs } from 'firebase/firestore';
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { useCollection } from '../../hooks/useCollection';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   ChevronDownIcon,
@@ -97,18 +95,7 @@ function classNames(...classes) {
 }
 
 const FlowersPage = () => {
-  const [flowers, setFlowers] = useState([]);
-
-  useEffect(() => {
-    const ref = collection(db, 'flowers');
-    getDocs(ref).then((snapshot) => {
-      let results = [];
-      snapshot.docs.forEach((doc) => {
-        results.push({ id: doc.id, ...doc.data() });
-        setFlowers(results);
-      });
-    });
-  }, []);
+  const { documents: flowers } = useCollection('flowers');
 
   return (
     <div className='bg-white'>
