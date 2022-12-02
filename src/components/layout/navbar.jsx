@@ -14,6 +14,7 @@ const navigation = [
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const user = useStoreState((state) => state.user);
+  const isLoggedIn = user || false;
   const { signout } = useSignout();
 
   return (
@@ -60,7 +61,7 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          {user?.email ? (
+          {isLoggedIn ? (
             <div className='hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end'>
               <button
                 to='/sign-in'
@@ -123,7 +124,7 @@ const Navbar = () => {
                   ))}
                 </div>
                 <div className='py-6'>
-                  {user?.email ? (
+                  {isLoggedIn ? (
                     <Link
                       to='/'
                       className='-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10 hover:text-green-500'

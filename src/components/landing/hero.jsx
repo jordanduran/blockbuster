@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useStoreState } from 'easy-peasy';
 
 const Hero = () => {
+  const user = useStoreState((state) => state.user);
+  const isLoggedIn = user || false;
+
   return (
     <div className='relative'>
       <div className='absolute inset-x-0 bottom-0 h-1/2 bg-gray-100' />
