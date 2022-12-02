@@ -13,7 +13,7 @@ const ProductGridHeader = ({ title, subtext }) => {
 
 ProductGridHeader.propTypes = {
   title: PropTypes.string.isRequired,
-  subtext: PropTypes.string.isRequired,
+  subtext: PropTypes.string,
 };
 
 export default ProductGridHeader;
